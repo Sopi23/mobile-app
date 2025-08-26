@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./components/Home";
 import Registration from "./components/Registration";
 import About from "./components/About";
-import firebaseApp from "./firebase";
+import { db } from "./firebase"; 
 
-console.log("Firebase app initialized:", firebaseApp); 
+console.log("Firestore initialized:", db);
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
       {/* Screens */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/registration" element={<Registration />} />
+        <Route path="/registration" element={<Registration db={db} />} /> {/* pass db */}
         <Route path="/about" element={<About />} />
       </Routes>
     </Router>
