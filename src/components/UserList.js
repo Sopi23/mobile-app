@@ -23,7 +23,7 @@ function UserList() {
   const [newEmail, setNewEmail] = useState("");
   const [newPhone, setNewPhone] = useState("");
 
-  // Fetch users
+  
   const fetchUsers = async () => {
     setLoading(true);
     try {
@@ -39,7 +39,7 @@ function UserList() {
 
   useEffect(() => { fetchUsers(); }, []);
 
-  // Sorting
+ 
   const sortBy = (key) => {
     const order = sortKey === key && sortOrder === "asc" ? "desc" : "asc";
     setSortKey(key);
@@ -58,7 +58,7 @@ function UserList() {
     user.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Add user
+ 
   const handleAddUser = async (e) => {
     e.preventDefault();
     if (!/^\d{10}$/.test(newPhone)) return alert("Phone must be 10 digits");
@@ -76,7 +76,7 @@ function UserList() {
     } finally { setLoading(false); }
   };
 
-  // Edit user
+ 
   const handleEdit = (user) => { setEditingUser(user); setName(user.name); setEmail(user.email); setPhone(user.phone); };
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -93,7 +93,7 @@ function UserList() {
     finally { setLoading(false); }
   };
 
-  // Delete user
+  
   const handleDelete = async () => {
     if (!deletingUser) return;
     setLoading(true);
@@ -122,7 +122,7 @@ function UserList() {
           <input type="text" placeholder="Search by name" className="form-control w-auto" style={{ minWidth: "200px" }} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
         </div>
 
-        {/* Table */}
+        
         <div className="table-responsive shadow-sm bg-white rounded p-2">
           <table className="table table-bordered table-hover align-middle">
             <thead className="table-dark">
@@ -149,7 +149,6 @@ function UserList() {
           </table>
         </div>
 
-        {/* Cards for mobile */}
         <div className="row mt-4">
           {filteredUsers.map(user => (
             <div key={user.id} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
@@ -170,7 +169,7 @@ function UserList() {
           ))}
         </div>
 
-        {/* Modals */}
+    
         {addingUser && <Modal title="Add User" onClose={() => setAddingUser(false)}>
           <UserForm name={newName} email={newEmail} phone={newPhone} setName={setNewName} setEmail={setNewEmail} setPhone={setNewPhone} onSubmit={handleAddUser} submitText="Add" />
         </Modal>}
@@ -189,7 +188,7 @@ function UserList() {
   );
 }
 
-// Modal Component
+
 const Modal = ({ title, children, onClose }) => (
   <div className="modal show d-block" tabIndex="-1">
     <div className="modal-dialog modal-dialog-centered">
@@ -204,7 +203,7 @@ const Modal = ({ title, children, onClose }) => (
   </div>
 );
 
-// User Form
+
 const UserForm = ({ name, email, phone, setName, setEmail, setPhone, onSubmit, submitText }) => (
   <form onSubmit={onSubmit}>
     <label className="form-label">Full Name</label>
